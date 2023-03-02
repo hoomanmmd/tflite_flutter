@@ -41,7 +41,19 @@ tflite_flutter:
     url: https://github.com/hoomanmmd/tflite_flutter.git
     ref: master
 ```
-This package is not tested on IOS
+
+### IOS
+To run on Simulator, Update end of your PodFile
+```
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    flutter_additional_ios_build_settings(target)
+    target.build_configurations.each do |config|
+      config.build_settings['EXCLUDED_ARCHS[sdk=iphonesimulator*]'] = 'i386 arm64'
+    end
+  end
+end
+```
 
 ## TFLite Flutter Helper Library
 
